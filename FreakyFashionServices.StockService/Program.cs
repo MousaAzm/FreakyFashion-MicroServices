@@ -25,4 +25,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+Seeding.CreateDbIfNotExists(app);
+
 app.Run();
