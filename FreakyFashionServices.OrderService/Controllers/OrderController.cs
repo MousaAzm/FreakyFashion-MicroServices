@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
-using FreakyFashionServices.OrderService.Models.DbModel;
 using FreakyFashionServices.OrderService.Models.Dtos;
 using Microsoft.AspNetCore.Mvc;
-using RabbitMQ.Client;
-using System.Text;
 
 namespace FreakyFashionServices.OrderService.Controllers
 {
@@ -11,7 +8,7 @@ namespace FreakyFashionServices.OrderService.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-       
+
         private readonly IMapper _mapper;
         public OrderController(IMapper mapper)
         {
@@ -29,8 +26,8 @@ namespace FreakyFashionServices.OrderService.Controllers
         [HttpPost]
         public IActionResult CreateOrder([FromBody] CreateOrderDto createOrderDto)
         {
-           return NoContent();  
-          
+            return NoContent();
+
         }
 
         //[HttpPut("{identifier}")]

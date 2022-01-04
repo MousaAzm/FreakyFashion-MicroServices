@@ -7,14 +7,14 @@ namespace FreakyFashionServices.CatalogService.Helper
     {
         public static string ToUrlSlug(string? value)
         {
-        
+
             value = value?.ToLowerInvariant();
 
             var bytes = Encoding.GetEncoding("Cyrillic").GetBytes(value!);
 
             value = Encoding.ASCII.GetString(bytes);
 
-            value = Regex.Replace(value, @"\-", "" , RegexOptions.Compiled);
+            value = Regex.Replace(value, @"\-", "", RegexOptions.Compiled);
 
             value = Regex.Replace(value, @"\s", "-", RegexOptions.Compiled);
 

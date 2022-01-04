@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace FreakyFashionServices.OrderService.Models.DbModel
+﻿namespace FreakyFashionServices.OrderService.Models.DbModel
 {
     public class Order
     {

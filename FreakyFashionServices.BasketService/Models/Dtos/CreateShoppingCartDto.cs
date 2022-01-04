@@ -8,6 +8,6 @@ namespace FreakyFashionServices.BasketService.Models.Dtos
 
         public List<ShoppingCartItem> Items { get; set; } = new List<ShoppingCartItem>();
 
-       
+
     }
 }

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FreakyFashionServices.CatalogService.Data;
-using FreakyFashionServices.CatalogService.Helper;
 using FreakyFashionServices.CatalogService.Models.DbModel;
 using FreakyFashionServices.CatalogService.Models.Dtos;
 using Microsoft.AspNetCore.Mvc;
@@ -40,14 +39,14 @@ namespace FreakyFashionServices.CatalogService.Controllers
 
         [HttpPost]
         public IActionResult CreateProduct([FromBody] CreateProductDto createProductDto)
-        {        
+        {
             var product = _mapper.Map<Product>(createProductDto);
             _context.Products.Add(product);
             _context.SaveChanges();
 
             return Ok(product);
         }
-      
+
         [HttpPut("{articleNumber}")]
         public IActionResult UpdateProduct(string articleNumber, [FromBody] UpdateProductDto updateProductDto)
         {
@@ -63,6 +62,6 @@ namespace FreakyFashionServices.CatalogService.Controllers
             return Ok(product);
         }
 
-       
+
     }
 }

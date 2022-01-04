@@ -6,7 +6,7 @@ namespace FreakyFashionServices.BasketService.Models.Dtos
     {
         public string? Identifier { get; set; }
 
-        public decimal TotalPrice { get;}
+        public decimal TotalPrice { get; }
 
         public List<ShoppingCartItem> Items { get; set; } = new List<ShoppingCartItem>();
     }

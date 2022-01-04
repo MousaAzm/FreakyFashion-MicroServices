@@ -6,9 +6,9 @@ namespace FreakyFashionServices.StockService.Mapping
 {
     public class StockProfile : Profile
     {
-        public  StockProfile()
+        public StockProfile()
         {
-            CreateMap<Stock ,ReadStockDto>();
+            CreateMap<Stock, ReadStockDto>();
             CreateMap<UpdateStockDto, Stock>();
         }
     }

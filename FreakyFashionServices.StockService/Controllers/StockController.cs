@@ -3,7 +3,6 @@ using FreakyFashionServices.StockService.Data;
 using FreakyFashionServices.StockService.Models.DbModel;
 using FreakyFashionServices.StockService.Models.Dtos;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.RegularExpressions;
 
 namespace FreakyFashionServices.StockService.Controllers
 {
@@ -58,7 +57,7 @@ namespace FreakyFashionServices.StockService.Controllers
         public IActionResult GetStockById(string articleNumber)
         {
             var stock = _context.Stocks.FirstOrDefault(s => s.ArticleNumber == articleNumber);
-            if(stock == null) return NotFound();
+            if (stock == null) return NotFound();
 
             return Ok(_mapper.Map<ReadStockDto>(stock));
         }

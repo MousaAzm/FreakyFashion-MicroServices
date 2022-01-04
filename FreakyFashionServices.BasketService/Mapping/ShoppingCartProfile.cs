@@ -6,7 +6,7 @@ namespace FreakyFashionServices.BasketService.Mapping
 {
     public class ShoppingCartProfile : Profile
     {
-        public  ShoppingCartProfile()
+        public ShoppingCartProfile()
         {
             CreateMap<ShoppingCart, ReadShoppingCartDto>();
             CreateMap<CreateShoppingCartDto, ShoppingCart>();

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FreakyFashionServices.BasketService.Data
 {
-    
+
     public class BasketDbContext : DbContext
     {
 
