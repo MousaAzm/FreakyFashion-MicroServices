@@ -16,8 +16,6 @@
     <Folder Include="Controllers\" />
     <Folder Include="Data\" />
     <Folder Include="Mapping\" />
-    <Folder Include="Models\DbModel\" />
-    <Folder Include="Models\Dtos\" />
   </ItemGroup>
 
 </Project>
