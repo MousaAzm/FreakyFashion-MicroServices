@@ -12,9 +12,9 @@
     "FreakyFashionServices.APIGateway": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:7037;http://localhost:5037",
+      "applicationUrl": "https://localhost:5500",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
