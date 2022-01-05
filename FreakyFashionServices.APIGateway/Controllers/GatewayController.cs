@@ -65,12 +65,6 @@ namespace FreakyFashionServices.APIGateway.Controllers
             return NoContent();
         }
 
-        [HttpGet("order")]
-        public async Task<ActionResult> GetOrders()
-        {
-            return Ok(await _repository.GetOrder());
-        }
-
         [HttpPost("order")]
         public async Task<ActionResult<ReadOrderDto>> CreateOrder(CreateOrderDto createOrderDto)
         {
@@ -84,21 +78,9 @@ namespace FreakyFashionServices.APIGateway.Controllers
             };
 
             var getOrder = await _repository.CreateOrder(order);
-            return Created("", getOrder.Id);
+            return Created("", getOrder.OrderId);
         }
 
-        [HttpPut("order/{identifier}")]
-        public async Task<ActionResult<ReadOrderDto>> UpdateOrder(string identifier, CreateOrderDto createOrderDto)
-        {
-            return Ok(await _repository.UpdateOrder(identifier, createOrderDto));
-        }
-
-        [HttpDelete("order/{identifier}")]
-        public IActionResult RemoveOrder(string identifier)
-        {
-            _repository.DeleteOrder(identifier);
-            return NoContent();
-        }
 
     }
 }

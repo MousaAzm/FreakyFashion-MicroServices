@@ -96,13 +96,6 @@ namespace FreakyFashionServices.APIGateway.Services
             return JsonConvert.DeserializeObject<ReadCartDto>(content);
         }
 
-        public async Task<IEnumerable<ReadOrderDto>> GetOrder()
-        {
-            string url = orderUrl;
-            var response = await _httpClient.CreateClient().GetStringAsync(url);
-            return JsonConvert.DeserializeObject<IEnumerable<ReadOrderDto>>(response);
-        }
-
         public async Task<ReadOrderDto> CreateOrder(CreateOrderDto createOrderDto)
         {
             string url = orderUrl;
@@ -114,21 +107,5 @@ namespace FreakyFashionServices.APIGateway.Services
             return JsonConvert.DeserializeObject<ReadOrderDto>(content);
         }
 
-        public async Task<ReadOrderDto> UpdateOrder(string identifier, CreateOrderDto createOrderDto)
-        {
-            string url = orderUrl + "/" + identifier;
-            string json = JsonConvert.SerializeObject(createOrderDto);
-            StringContent stringContent = new StringContent(json, Encoding.UTF8, Application.Json);
-            var response = await _httpClient.CreateClient().PutAsync(url, stringContent);
-            response.EnsureSuccessStatusCode();
-            var content = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<ReadOrderDto>(content);
-        }
-
-        public void DeleteOrder(string identifier)
-        {
-            string url = orderUrl + "/" + identifier;
-            _httpClient.CreateClient().DeleteAsync(url);
-        }
     }
 }

@@ -1,6 +1,10 @@
 ﻿using AutoMapper;
+using FreakyFashionServices.OrderService.Models.DbModel;
 using FreakyFashionServices.OrderService.Models.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using RabbitMQ.Client;
+using System.Text;
 
 namespace FreakyFashionServices.OrderService.Controllers
 {
@@ -15,44 +19,26 @@ namespace FreakyFashionServices.OrderService.Controllers
             _mapper = mapper;
         }
 
-        //[HttpGet]
-        //public IActionResult GetOrders()
-        //{
-        //    var getOrder = _context.Orders.ToList();
-        //    if(getOrder == null) return NotFound();
-        //    return Ok(_mapper.Map<IEnumerable<ReadOrderDto>>(getOrder));
-        //}
-
         [HttpPost]
         public IActionResult CreateOrder([FromBody] CreateOrderDto createOrderDto)
         {
-            return NoContent();
+            var order = _mapper.Map<Order>(createOrderDto);
+            var factory = new ConnectionFactory { Uri = new Uri("amqp://guest:guest@localhost:5672") };
+            using var connection = factory.CreateConnection();
+            using var channel = connection.CreateModel();
+            channel.QueueDeclare(queue: "order", durable: false, exclusive: false, autoDelete: false, arguments: null);
 
+            var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(createOrderDto));
+
+            channel.BasicPublish(
+              exchange: "",
+              routingKey: "order",
+              basicProperties: null,
+              body: body);
+            
+            return Ok(order);
         }
 
-        //[HttpPut("{identifier}")]
-        //public IActionResult UpdateOrder(string identifier, [FromBody] UpdateOrderDto updateOrderDto)
-        //{
-        //    var getOrder = _context.Orders.FirstOrDefault(o => o.Identifier == identifier);
-        //    if (getOrder == null) return NotFound();
-
-        //    _mapper.Map(updateOrderDto, getOrder);
-        //    _context.Orders.Update(getOrder);
-        //    _context.SaveChanges();
-
-        //    return NoContent();
-        //}
-
-        //[HttpDelete("{identifier}")]
-        //public IActionResult DeleteOrder(string identifier)
-        //{
-        //    var getOrder = _context.Orders.FirstOrDefault(o => o.Identifier == identifier);
-        //    if(getOrder == null) return NotFound();
-
-        //    _context.Orders.Remove(getOrder);
-        //    _context.SaveChanges();
-
-        //    return NoContent();
-        //}
+    
     }
 }

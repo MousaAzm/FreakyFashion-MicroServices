@@ -11,9 +11,6 @@ namespace FreakyFashionServices.APIGateway.Services
         void UpdateStock(string articleNumber, StockDto stockDto);
         Task<ReadCartDto> GetBasket(string articleNumber);
         Task<ReadCartDto> CreateBasket(string articleNumber, CreateCartDto createShoppingCartDto);
-        Task<IEnumerable<ReadOrderDto>> GetOrder();
         Task<ReadOrderDto> CreateOrder(CreateOrderDto createOrderDto);
-        Task<ReadOrderDto> UpdateOrder(string identifier, CreateOrderDto createOrderDto);
-        void DeleteOrder(string identifier);
     }
 }

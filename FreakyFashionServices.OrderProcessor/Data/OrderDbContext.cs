@@ -9,6 +9,7 @@ namespace FreakyFashionServices.OrderProcessor.Data
         public OrderDbContext(DbContextOptions<OrderDbContext> options)
           : base(options)
         {
+
         }
 
         public DbSet<Order> Orders { get; set; } = null!;
