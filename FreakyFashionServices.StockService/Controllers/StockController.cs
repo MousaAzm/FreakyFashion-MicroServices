@@ -54,7 +54,7 @@ namespace FreakyFashionServices.StockService.Controllers
         }
 
         [HttpGet("{articleNumber}")]
-        public IActionResult GetStockById(string articleNumber)
+        public IActionResult GetStockByArticleNummber(string articleNumber)
         {
             var stock = _context.Stocks.FirstOrDefault(s => s.ArticleNumber == articleNumber);
             if (stock == null) return NotFound();

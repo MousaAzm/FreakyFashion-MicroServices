@@ -33,7 +33,7 @@ namespace FreakyFashionServices.APIGateway.Controllers
                 var stock = new StockDto
                 {
                     ArticleNumber = createProductDto.ArticleNumber,
-                    StockLevel = createProductDto.StockLevel
+                    StockLevel = 1
                 };
                 _repository.UpdateStock(stock.ArticleNumber, stock);
                 return Created("", result);
@@ -41,12 +41,9 @@ namespace FreakyFashionServices.APIGateway.Controllers
             else
             {
                 var result = await _repository.UpdateProduct(createProductDto.ArticleNumber, createProductDto);
-                var stock = new StockDto
-                {
-                    ArticleNumber = createProductDto.ArticleNumber,
-                    StockLevel = createProductDto.StockLevel
-                };
-                _repository.UpdateStock(stock.ArticleNumber, stock);
+                var getStock = await _repository.GetStockByArticleNummber(createProductDto.ArticleNumber);            
+                getStock.StockLevel += 1;               
+                _repository.UpdateStock(createProductDto.ArticleNumber, getStock);
                 return Created("", result);
             }
 

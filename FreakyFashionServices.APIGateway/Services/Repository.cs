@@ -71,6 +71,13 @@ namespace FreakyFashionServices.APIGateway.Services
             return JsonConvert.DeserializeObject<IEnumerable<StockDto>>(response);
         }
 
+        public async Task<StockDto> GetStockByArticleNummber(string articleNumber)
+        {
+            string url = stockUrl + "/" + articleNumber;
+            var response = await _httpClient.CreateClient().GetStringAsync(url);
+            return JsonConvert.DeserializeObject<StockDto>(response);
+        }
+
         public void UpdateStock(string articleNumber, StockDto stockDto)
         {
             string url = stockUrl + "/" + articleNumber;
