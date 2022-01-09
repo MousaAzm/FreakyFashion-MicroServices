@@ -8,8 +8,13 @@ namespace FreakyFashionServices.OrderService.Mapping
     {
         public OrderProfile()
         {
-            CreateMap<Order, ReadOrderDto>();
-            CreateMap<CreateOrderDto, Order>();
+            CreateMap<Order, OrderDto>();
+            CreateMap<OrderDto, Order>().ForMember(m => m.OrderCarts, 
+                b => b.MapFrom(c => new OrderCart() 
+                {   Identifier = c.Identifier, 
+                    Lines = c.OrderLines
+                }));
+           
         }
     }
 }

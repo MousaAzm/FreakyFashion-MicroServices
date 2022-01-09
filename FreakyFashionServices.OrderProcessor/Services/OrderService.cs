@@ -21,10 +21,10 @@ namespace FreakyFashionServices.OrderProcessor.Services
             _context = context;
         }
 
-        public void CreateOrder(CreateOrderDto createOrderDto)
+        public void CreateOrder(OrderDto orderDto)
         {
             Thread.Sleep(2000);
-            var getIdentifier = _context.Orders.FirstOrDefault(o => o.Identifier == createOrderDto.Identifier);
+            var getIdentifier = _context.Orders.FirstOrDefault(o => o.Identifier == orderDto.Identifier);
             if (getIdentifier != null)
             {
                 _context.Orders.Remove(getIdentifier);
@@ -37,8 +37,8 @@ namespace FreakyFashionServices.OrderProcessor.Services
             });
 
             IMapper mapper = mapperConfig.CreateMapper();
-                
-            _context.Orders.Add(mapper.Map<Order>(createOrderDto));
+
+            _context.Orders.Add(mapper.Map<Order>(orderDto));
             _context.SaveChanges();
             
         }

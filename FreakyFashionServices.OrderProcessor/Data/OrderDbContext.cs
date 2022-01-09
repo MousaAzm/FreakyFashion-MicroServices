@@ -13,5 +13,9 @@ namespace FreakyFashionServices.OrderProcessor.Data
         }
 
         public DbSet<Order> Orders { get; set; } = null!;
+        public DbSet<OrderLine> OrderLines { get; set; } = null!;
+        public DbSet<OrderCart> OrderCarts { get; set; } = null!;
+
     }
 }
+

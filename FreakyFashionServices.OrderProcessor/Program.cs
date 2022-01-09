@@ -35,7 +35,7 @@ consumer.Received += (sender, e) => {
 
     var body = e.Body.ToArray();
     var json = Encoding.UTF8.GetString(body);
-    var orderDto = JsonConvert.DeserializeObject<CreateOrderDto>(json); 
+    var orderDto = JsonConvert.DeserializeObject<OrderDto>(json); 
     orderservice.CreateOrder(orderDto);
 };
 

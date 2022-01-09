@@ -1,9 +1,10 @@
 ﻿namespace FreakyFashionServices.APIGateway.Models.Dtos
 {
-    public class CreateCartDto
+    public class ShoppingCartDto
     {
         public string? Identifier { get; set; }
 
-        public List<CartItemDto> Items { get; set; } = new List<CartItemDto>();
+        public List<CartItemsDto> Items { get; set; } = new List<CartItemsDto>();
+
     }
 }

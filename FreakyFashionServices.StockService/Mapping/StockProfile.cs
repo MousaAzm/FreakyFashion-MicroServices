@@ -8,8 +8,8 @@ namespace FreakyFashionServices.StockService.Mapping
     {
         public StockProfile()
         {
-            CreateMap<Stock, ReadStockDto>();
-            CreateMap<UpdateStockDto, Stock>();
+            CreateMap<Stock, StockDto>();
+            CreateMap<StockDto, Stock>();
         }
     }
 }

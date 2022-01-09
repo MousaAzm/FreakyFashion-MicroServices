@@ -20,7 +20,7 @@ namespace FreakyFashionServices.BasketService.Controllers
         }
 
         [HttpGet("{identifier}")]
-        public ActionResult<ReadShoppingCartDto> GetBasket(string identifier)
+        public ActionResult<ShoppingCartDto> GetBasket(string identifier)
         {
             var basket = _redisCashe.GetString(identifier);
             if (basket == null) return NotFound();
@@ -28,7 +28,7 @@ namespace FreakyFashionServices.BasketService.Controllers
         }
 
         [HttpPut("{identifier}")]
-        public IActionResult CreateBasket(string identifier, CreateShoppingCartDto createShoppingCartDto)
+        public IActionResult CreateBasket(string identifier, ShoppingCartDto createShoppingCartDto)
         {
             var basket = _mapper.Map<ShoppingCart>(createShoppingCartDto);
             var serialize = JsonSerializer.Serialize(basket);

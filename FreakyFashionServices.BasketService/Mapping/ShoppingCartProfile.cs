@@ -8,8 +8,8 @@ namespace FreakyFashionServices.BasketService.Mapping
     {
         public ShoppingCartProfile()
         {
-            CreateMap<ShoppingCart, ReadShoppingCartDto>();
-            CreateMap<CreateShoppingCartDto, ShoppingCart>();
+            CreateMap<ShoppingCart, ShoppingCartDto>();
+            CreateMap<ShoppingCartDto, ShoppingCart>();
         }
     }
 }

@@ -5,12 +5,6 @@
         public string? Identifier { get; set; }
 
         public List<ShoppingCartItem> Items { get; set; } = new List<ShoppingCartItem>();
-
-        public ShoppingCart(string identifier)
-        {
-            Identifier = identifier;
-        }
-
     }
 }
 

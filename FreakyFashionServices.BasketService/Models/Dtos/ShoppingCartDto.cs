@@ -2,12 +2,11 @@
 
 namespace FreakyFashionServices.BasketService.Models.Dtos
 {
-    public class ReadShoppingCartDto
+    public class ShoppingCartDto
     {
         public string? Identifier { get; set; }
 
-        public decimal TotalPrice { get; }
-
         public List<ShoppingCartItem> Items { get; set; } = new List<ShoppingCartItem>();
+
     }
 }

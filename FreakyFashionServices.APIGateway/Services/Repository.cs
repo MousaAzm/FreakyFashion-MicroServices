@@ -86,32 +86,32 @@ namespace FreakyFashionServices.APIGateway.Services
             _httpClient.CreateClient().PutAsync(url, stringContent);
         }
 
-        public async Task<ReadCartDto> GetBasket(string articleNumber)
+        public async Task<ShoppingCartDto> GetBasket(string articleNumber)
         {
             string url = basketUrl + articleNumber;
             var response = await _httpClient.CreateClient().GetStringAsync(url);
-            return JsonConvert.DeserializeObject<ReadCartDto>(response);
+            return JsonConvert.DeserializeObject<ShoppingCartDto>(response);
         }
 
-        public async Task<ReadCartDto> CreateBasket(string articleNumber, CreateCartDto createCartDto)
+        public async Task<ShoppingCartDto> CreateBasket(string articleNumber, ShoppingCartDto cartDto)
         {
             string url = basketUrl + articleNumber;
-            string json = JsonConvert.SerializeObject(createCartDto);
+            string json = JsonConvert.SerializeObject(cartDto);
             StringContent stringContent = new StringContent(json, Encoding.UTF8, Application.Json);
             var response = await _httpClient.CreateClient().PutAsync(url, stringContent);
             var content = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<ReadCartDto>(content);
+            return JsonConvert.DeserializeObject<ShoppingCartDto>(content);
         }
 
-        public async Task<ReadOrderDto> CreateOrder(CreateOrderDto createOrderDto)
+        public async Task<OrderDto> CreateOrder(OrderDto orderDto)
         {
-            string url = orderUrl;
-            string json = JsonConvert.SerializeObject(createOrderDto);
+            string url = orderUrl;       
+            string json = JsonConvert.SerializeObject(orderDto);
             StringContent stringContent = new StringContent(json, Encoding.UTF8, Application.Json);
             var response = await _httpClient.CreateClient().PostAsync(url, stringContent);
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<ReadOrderDto>(content);
+            return JsonConvert.DeserializeObject<OrderDto>(content);
         }
 
     }

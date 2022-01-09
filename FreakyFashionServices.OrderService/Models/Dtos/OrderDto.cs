@@ -1,6 +1,8 @@
-﻿namespace FreakyFashionServices.OrderService.Models.DbModel
+﻿using FreakyFashionServices.OrderService.Models.DbModel;
+
+namespace FreakyFashionServices.OrderService.Models.Dtos
 {
-    public class Order
+    public class OrderDto
     {
         public Guid OrderId { get; set; }
 

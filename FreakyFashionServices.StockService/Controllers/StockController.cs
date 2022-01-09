@@ -24,18 +24,18 @@ namespace FreakyFashionServices.StockService.Controllers
         public IActionResult GetAllStocks()
         {
             var stocks = _context.Stocks.ToList();
-            return Ok(_mapper.Map<IEnumerable<ReadStockDto>>(stocks));
+            return Ok(_mapper.Map<IEnumerable<StockDto>>(stocks));
         }
 
 
         [HttpPut("{articleNumber}")]
-        public IActionResult UpdateStock(string articleNumber, [FromBody] UpdateStockDto updateStockDto)
+        public IActionResult UpdateStock(string articleNumber, [FromBody] StockDto stockDto)
         {
 
             var stock = _context.Stocks.FirstOrDefault(m => m.ArticleNumber == articleNumber);
             if (stock == null)
             {
-                var newStock = _mapper.Map<Stock>(updateStockDto);
+                var newStock = _mapper.Map<Stock>(stockDto);
                 newStock.ArticleNumber = articleNumber;
                 _context.Stocks.Add(newStock);
             }
@@ -45,7 +45,7 @@ namespace FreakyFashionServices.StockService.Controllers
                 _context.SaveChanges();
                 _context.Stocks.Add(stock);
                 stock.ArticleNumber = articleNumber;
-                stock.StockLevel = updateStockDto.StockLevel;
+                stock.StockLevel = stockDto.StockLevel;
             }
 
             _context.SaveChanges();
@@ -59,7 +59,7 @@ namespace FreakyFashionServices.StockService.Controllers
             var stock = _context.Stocks.FirstOrDefault(s => s.ArticleNumber == articleNumber);
             if (stock == null) return NotFound();
 
-            return Ok(_mapper.Map<ReadStockDto>(stock));
+            return Ok(_mapper.Map<StockDto>(stock));
         }
 
     }

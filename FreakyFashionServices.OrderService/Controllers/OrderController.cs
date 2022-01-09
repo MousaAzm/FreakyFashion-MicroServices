@@ -20,15 +20,15 @@ namespace FreakyFashionServices.OrderService.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateOrder([FromBody] CreateOrderDto createOrderDto)
+        public IActionResult CreateOrder([FromBody] OrderDto orderDto)
         {
-            var order = _mapper.Map<Order>(createOrderDto);
+            var order = _mapper.Map<Order>(orderDto);
             var factory = new ConnectionFactory { Uri = new Uri("amqp://guest:guest@localhost:5672") };
             using var connection = factory.CreateConnection();
             using var channel = connection.CreateModel();
             channel.QueueDeclare(queue: "order", durable: false, exclusive: false, autoDelete: false, arguments: null);
 
-            var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(createOrderDto));
+            var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(orderDto));
 
             channel.BasicPublish(
               exchange: "",

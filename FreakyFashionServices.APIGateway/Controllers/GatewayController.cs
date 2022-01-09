@@ -56,24 +56,30 @@ namespace FreakyFashionServices.APIGateway.Controllers
         }
 
         [HttpPut("basket/{articleNumber}")]
-        public async Task<ActionResult> CreateBasket(string articleNumber, CreateCartDto createCartDto)
+        public async Task<ActionResult> CreateBasket(string articleNumber, ShoppingCartDto createCartDto)
         {
             await _repository.CreateBasket(articleNumber, createCartDto);
             return NoContent();
         }
 
         [HttpPost("order")]
-        public async Task<ActionResult<ReadOrderDto>> CreateOrder(CreateOrderDto createOrderDto)
+        public async Task<ActionResult<OrderDto>> CreateOrder(OrderDto orderDto)
         {
-            var basket = await _repository.GetBasket(createOrderDto.Identifier);
+            var basket = await _repository.GetBasket(orderDto.Identifier);      
             if (basket == null) return NotFound();
-            var order = new CreateOrderDto()
+
+            var order = new OrderDto()
             {
                 Identifier = basket.Identifier!,
-                Customer = createOrderDto.Customer,
-                Date = DateTime.Now.ToString("MM/dd/yyyy hh:mm tt")
+                Customer = orderDto.Customer,
+                Date = DateTime.Now.ToString("MM/dd/yyyy hh:mm tt"),
+                OrderLines = basket.Items.Select(m => new CartItemsDto()
+                {
+                    ProductId = m.ProductId,
+                    Quantity = m.Quantity,
+                }).ToList(),
             };
-
+ 
             var getOrder = await _repository.CreateOrder(order);
             return Created("", getOrder.OrderId);
         }

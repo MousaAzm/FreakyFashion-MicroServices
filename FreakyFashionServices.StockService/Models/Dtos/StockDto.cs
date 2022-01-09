@@ -1,6 +1,6 @@
 ﻿namespace FreakyFashionServices.StockService.Models.Dtos
 {
-    public class ReadStockDto
+    public class StockDto
     {
         public string? ArticleNumber { get; set; }
 
